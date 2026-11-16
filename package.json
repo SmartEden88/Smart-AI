@@ -1,0 +1,17 @@
+{
+  "name": "smart-ai-learning",
+  "version": "3.0.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "dev": "netlify dev",
+    "build": "echo \"Static site ready\""
+  },
+  "dependencies": {
+    "@supabase/supabase-js": "^2.49.1",
+    "groq-sdk": "^0.15.0"
+  },
+  "devDependencies": {
+    "netlify-cli": "^17.38.1"
+  }
+}
