@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Welcome to Smart AI</title><link rel="stylesheet" href="style.css">
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <script src="config.js"></script><script defer src="auth.js"></script>
+</head>
+<body class="auth-page">
+  <main class="auth-shell">
+    <a class="brand" href="auth.html"><span class="brand-mark">✦</span> Smart AI</a>
+    <section class="auth-card">
+      <div class="eyebrow">YOUR PERSONAL LEARNING COMPANION</div>
+      <h1 id="authTitle">Welcome back</h1>
+      <p class="muted" id="authSubtitle">Log in to continue learning where you left off.</p>
+      <div class="auth-tabs">
+        <button class="tab active" id="loginTab">Log in</button>
+        <button class="tab" id="signupTab">Create account</button>
+      </div>
+      <form id="authForm">
+        <label for="email">Email address</label>
+        <input id="email" type="email" autocomplete="email" placeholder="you@example.com" required>
+        <label for="password">Password</label>
+        <input id="password" type="password" autocomplete="current-password" minlength="8" placeholder="At least 8 characters" required>
+        <button class="primary full" id="submitAuth" type="submit">Log in</button>
+        <button class="ghost full" id="forgotPassword" type="button">Forgot password?</button>
+      </form>
+      <p id="authMessage" class="form-message" aria-live="polite"></p>
+      <p class="tiny muted">Use an email address you can access. Never share your password or API key.</p>
+    </section>
+    <p class="tiny muted center">Learn at your pace. Every step counts.</p>
+  </main>
+</body></html>

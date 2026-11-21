@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Smart AI — Your personal learning space</title><link rel="stylesheet" href="style.css">
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <script src="config.js"></script><script defer src="app.js"></script>
+</head>
+<body>
+  <div class="app-layout">
+    <aside class="sidebar">
+      <a class="brand" href="index.html"><span class="brand-mark">✦</span> Smart AI</a>
+      <button class="primary full" id="newChat">＋ New lesson</button>
+      <nav class="side-nav">
+        <button class="nav-item active" data-view="tutor">✦ AI Tutor</button>
+        <button class="nav-item" data-view="study">▦ Study hub</button>
+        <button class="nav-item" data-view="quiz">▤ Practice quiz</button>
+        <button class="nav-item" data-view="flashcards">▣ Flashcards</button>
+        <button class="nav-item" data-view="history">◷ Past work</button>
+      </nav>
+      <div class="sidebar-bottom">
+        <div class="user-chip"><span class="avatar" id="avatar">M</span><span id="userEmail">Student</span></div>
+        <button class="ghost full" id="logout">Log out</button>
+      </div>
+    </aside>
+    <main class="main-content">
+      <header class="topbar"><div><span class="eyebrow">YOUR LEARNING SPACE</span><h1 id="pageTitle">Smart AI Tutor</h1></div><span class="status-pill"><i></i> AI tutor ready</span></header>
+
+      <section class="view active" id="tutorView">
+        <div class="welcome-panel" id="welcomePanel">
+          <div class="robot-guide" id="robotGuide" aria-label="Smart AI robot guide"><div class="robot-antenna"></div><div class="robot-face"><i></i><i></i><b></b></div><div class="robot-body">✦</div><span class="robot-state" id="robotState">READY TO LEARN</span></div><h2>What would you like to learn today?</h2>
+          <p class="muted">Explore school subjects, ask questions and learn at your own pace. I’ll guide you one step at a time.</p>
+          <label class="subject-picker">Choose a subject<select id="tutorSubject"><option>Mathematics</option><option>English Language</option><option>Biology</option><option>Chemistry</option><option>Physics</option><option>Basic Science</option><option>Agricultural Science</option><option>Economics</option><option>Government</option><option>Geography</option><option>History</option><option>Literature in English</option><option>Civic Education</option><option>Computer Studies</option><option>Business Studies</option><option>Accounting</option><option>French</option><option>Religious Studies</option><option>Other / General Studies</option></select></label>
+          <div class="suggestions">
+            <button class="suggestion" data-prompt="Explain a key topic in this subject with a clear example.">✦ Explain a topic</button>
+            <button class="suggestion" data-prompt="Give me a simple example and explain it step by step.">◯ Step-by-step example</button>
+            <button class="suggestion" data-prompt="Ask me three questions to check my understanding.">⌗ Check my understanding</button>
+          </div>
+        </div>
+        <div class="chat-list" id="chatList" aria-live="polite"></div>
+        <div class="composer-wrap">
+          <div class="mode-row"><button class="mode-chip active" id="tutorMode">✦ Explain</button><button class="mode-chip" id="hintMode">♧ Give me a hint</button></div>
+          <form id="chatForm" class="composer"><textarea id="question" rows="2" placeholder="Ask Smart AI about any school subject…" required></textarea><input id="photoInput" type="file" accept="image/png,image/jpeg,image/webp" hidden><button type="button" class="tool-button" id="photoButton" aria-label="Upload a question photo" title="Upload a question photo">📷</button><button type="button" class="tool-button" id="voiceButton" aria-label="Start voice input" title="Voice input">🎙</button><button class="send-button" id="sendButton" aria-label="Send">➤</button></form>
+          <p class="tiny muted" id="attachmentStatus">Photo questions and voice input are supported when your browser allows them. </p><p class="tiny muted">Smart AI can make mistakes. Check important calculations and ask questions if a step is unclear.</p>
+        </div>
+      </section>
+
+      <section class="view" id="quizView">
+        <div class="feature-card">
+          <div class="eyebrow">PRACTICE MAKES PROGRESS</div><h2>Challenge yourself</h2><p class="muted">Choose a subject, topic and difficulty. Smart AI will create a five-question quiz just for you.</p>
+          <div class="quiz-controls">
+            <label>Subject<select id="quizSubject"><option>Mathematics</option><option>English Language</option><option>Biology</option><option>Chemistry</option><option>Physics</option><option>Basic Science</option><option>Agricultural Science</option><option>Economics</option><option>Government</option><option>Geography</option><option>History</option><option>Literature in English</option><option>Civic Education</option><option>Computer Studies</option><option>Business Studies</option><option>Accounting</option><option>French</option><option>Religious Studies</option><option>Other / General Studies</option></select></label>
+            <label>Topic<input id="quizTopic" value="Foundations" placeholder="e.g. Fractions, cells, grammar"></label>
+            <label>Difficulty<select id="quizDifficulty"><option value="easy">Easy</option><option value="medium" selected>Medium</option><option value="hard">Challenging</option></select></label>
+          </div>
+          <button class="primary" id="startQuiz">Create my quiz ✦</button>
+        </div>
+        <div id="quizArea"></div>
+      </section>
+
+      <section class="view" id="studyView">
+        <div class="feature-card"><div class="eyebrow">YOUR STUDY HUB</div><h2>Build a learning habit</h2><p class="muted">Pick a subject, set a small goal and use Smart AI to make steady progress.</p>
+          <div class="quiz-controls"><label>Subject<select id="studySubject"><option>Mathematics</option><option>English Language</option><option>Biology</option><option>Chemistry</option><option>Physics</option><option>Basic Science</option><option>Agricultural Science</option><option>Economics</option><option>Government</option><option>Geography</option><option>History</option><option>Literature in English</option><option>Civic Education</option><option>Computer Studies</option><option>Business Studies</option><option>Accounting</option><option>French</option><option>Religious Studies</option><option>Other / General Studies</option></select></label><label>Study goal<input id="studyGoal" value="Understand one important topic" maxlength="120"></label></div>
+          <button class="primary" id="makePlan">Create my study plan ✦</button><div id="planArea"></div>
+          <div class="profile-editor"><h3>My learning profile</h3><div class="quiz-controls"><label>Display name<input id="profileName" maxlength="60" placeholder="What should Smart AI call you?"></label><label>Learning level<select id="profileLevel"><option>Primary</option><option selected>Secondary</option><option>University</option><option>Adult learner</option><option>Other</option></select></label></div><button class="ghost" id="saveProfile" type="button">Save profile</button><span id="profileStatus" class="tiny muted" aria-live="polite"></span></div>
+        </div>
+      </section>
+      <section class="view" id="flashcardsView">
+        <div class="feature-card"><div class="eyebrow">ACTIVE RECALL</div><h2>Smart flashcards</h2><p class="muted">Create a set of revision cards for any subject, then reveal each answer as you study.</p>
+          <div class="quiz-controls"><label>Subject<select id="flashSubject"><option>Mathematics</option><option>English Language</option><option>Biology</option><option>Chemistry</option><option>Physics</option><option>Basic Science</option><option>Agricultural Science</option><option>Economics</option><option>Government</option><option>Geography</option><option>History</option><option>Literature in English</option><option>Civic Education</option><option>Computer Studies</option><option>Business Studies</option><option>Accounting</option><option>French</option><option>Religious Studies</option><option>Other / General Studies</option></select></label><label>Topic<input id="flashTopic" value="Key ideas" maxlength="120"></label></div>
+          <button class="primary" id="makeFlashcards">Create flashcards ✦</button><div id="flashArea"></div>
+        </div>
+      </section>
+      <section class="view" id="historyView">
+        <div class="progress-strip"><div><strong id="lessonCount">0</strong><span>Saved sessions</span></div><div><strong id="quizCount">0</strong><span>Quiz attempts</span></div><div><strong>✦</strong><span>Keep learning</span></div></div>
+        <div class="feature-card"><div class="eyebrow">YOUR LEARNING JOURNEY</div><h2>Past work</h2><p class="muted">Your saved lessons and practice sessions appear here.</p></div>
+        <div id="historyList" class="history-list"></div>
+      </section>
+    </main>
+  </div>
+  <div class="toast" id="toast" role="status"></div>
+</body></html>

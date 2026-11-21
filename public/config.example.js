@@ -1,0 +1,1 @@
+// Public browser configuration only. Never put Groq or service-role keys here.\nwindow.SMARTAI_CONFIG = {\n  SUPABASE_URL: "YOUR_SUPABASE_PROJECT_URL",\n  SUPABASE_ANON_KEY: "YOUR_SUPABASE_ANON_KEY",\n  API_BASE_URL: "https://YOUR-RENDER-SERVICE.onrender.com"\n};\n
